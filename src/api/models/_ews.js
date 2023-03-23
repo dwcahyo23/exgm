@@ -20,6 +20,27 @@ export const _ews = readonly.define(
         wdo_qty: {
             type: DataTypes.INTEGER,
         },
+        delay_qty: {
+            type: DataTypes.INTEGER,
+        },
+        fg_qty: {
+            type: DataTypes.INTEGER,
+        },
+        trs_qty: {
+            type: DataTypes.INTEGER,
+        },
+        pk_qty: {
+            type: DataTypes.INTEGER,
+        },
+        wip3_qty: {
+            type: DataTypes.INTEGER,
+        },
+        wip_qty: {
+            type: DataTypes.INTEGER,
+        },
+        asrs_qty: {
+            type: DataTypes.INTEGER,
+        },
     },
     { freezeTableName: true, timestamps: false }
 )

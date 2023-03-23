@@ -206,7 +206,7 @@ export default {
             const authHeader = req.headers['authorization']
             const token = authHeader && authHeader.split(' ')[1]
             const response = await _ews.findAll({})
-            return res.status(200).json(token)
+            return res.status(200).json(response)
         } catch (error) {
             console.log(error)
         }
