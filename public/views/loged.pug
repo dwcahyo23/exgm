@@ -1,6 +1,9 @@
 extends layout
 
 block layout-content
-  div.View
-    p your token header: #{token} 
-    a(href="/api-docs") Swager api-docs
+  div.View   
+    a(class='button' href='/api-docs') Go to api docs
+    p Token valid until #{exp}
+    p #{token}
+    form(method="POST", action="/refrshtoken")
+      input(type = "submit", name = "refresh token", value = "refresh token")

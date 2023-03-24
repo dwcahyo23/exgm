@@ -33,7 +33,7 @@ function generateJWTToken(tokenPayload) {
     // Calculate the issued at and expiration dates
     const date = new Date()
     const iat = Math.floor(date.getTime() / 1000)
-    const exp = Math.floor(date.setDate(date.getDate() + 7) / 1000)
+    const exp = Math.floor(date.setDate(date.getDate() + 30) / 1000)
 
     // Define token payload
     const payload = {
@@ -74,6 +74,16 @@ function verifyJWTToken(token) {
 
     // Verify that the resulting signature is valid
     return signature === signatureCheck
+}
+
+function isTokenExpired(token) {
+    const payloadBase64 = token.split('.')[1]
+    const decodedJson = Buffer.from(payloadBase64, 'base64').toString()
+    const decoded = JSON.parse(decodedJson)
+    const exp = decoded.exp
+    let newDate = new Date()
+    newDate.setTime(exp * 1000).toLocaleString()
+    return newDate
 }
 
 export default {
@@ -152,22 +162,34 @@ export default {
 
             if (error.length === 0) {
                 const access_token = generateJWTToken({ id: isUser.id_user })
-                await _muser.update(
-                    { token: access_token },
-                    {
-                        where: {
-                            id_user: isUser.id_user,
-                        },
-                    }
-                )
-                const response = {
-                    access_token: access_token,
-                }
-                // return res.status(200).json(response)
-                return res.render('loged', { token: access_token })
+                res.cookie('_id', isUser.id_user, {
+                    expires: new Date(Date.now() + 900000),
+                    httpOnly: true,
+                })
+                const exp = isTokenExpired(access_token)
+                return res.render('loged', { token: isUser.token, exp: exp })
             }
             // return res.status(400).json(error)
             return res.send(`check your username & password`)
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    async refreshToken(req, res) {
+        const { _id } = req.cookies
+        try {
+            const access_token = generateJWTToken({ id: _id })
+            await _muser.update(
+                { token: access_token },
+                {
+                    where: {
+                        id_user: _id,
+                    },
+                }
+            )
+            const exp = isTokenExpired(access_token)
+            return res.render('loged', { token: access_token, exp: exp })
         } catch (error) {
             console.log(error)
         }

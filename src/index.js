@@ -7,6 +7,7 @@ import logger from 'morgan'
 import routes from './api/routes'
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swager.json')
+const cookieParser = require('cookie-parser')
 
 dotenv.config()
 
@@ -15,13 +16,10 @@ app.set('views', path.join(__dirname, '../public/views'))
 app.set('view engine', 'pug')
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
 
 // adding Helmet to enhance your Rest API's security
-app.use(
-    helmet({
-        crossOriginEmbedderPolicy: false,
-    })
-)
+app.use(helmet.hidePoweredBy())
 
 // enabling CORS for all requests
 app.use(
@@ -36,10 +34,6 @@ app.use(logger('dev'))
 
 // swager test
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-
-app.get('/', (req, res) => {
-    res.render('login')
-})
 
 // server route
 routes(app)
