@@ -3,7 +3,8 @@ import express from 'express'
 import helmet from 'helmet'
 import cors from 'cors'
 import path from 'path'
-import logger from 'morgan'
+import fs from 'fs'
+import morgan from 'morgan'
 import routes from './api/routes'
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swager.json')
@@ -21,6 +22,24 @@ app.use(cookieParser())
 // adding Helmet to enhance your Rest API's security
 app.use(helmet.hidePoweredBy())
 
+// log only 4xx and 5xx responses to console
+app.use(
+    morgan('dev', {
+        skip: function (req, res) {
+            return res.statusCode < 400
+        },
+    })
+)
+
+// log all requests to access.log
+app.use(
+    morgan('common', {
+        stream: fs.createWriteStream(path.join(__dirname, 'access.log'), {
+            flags: 'a',
+        }),
+    })
+)
+
 // enabling CORS for all requests
 app.use(
     cors({
@@ -28,9 +47,6 @@ app.use(
         allowedHeaders: ['Content-Type', 'Authorization'],
     })
 )
-
-// adding morgan to log HTTP requests
-app.use(logger('dev'))
 
 // swager test
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
