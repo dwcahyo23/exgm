@@ -9,6 +9,13 @@
     "dev": "nodemon --exec npx babel-node src/index.js",
     "lint": "eslint ."
   },
+  "bin": "./build/index.js",
+  "pkg": {
+    "assets": [
+      ".env",
+      "views/**/*"
+    ]
+  },
   "author": "iiotgm",
   "license": "ISC",
   "devDependencies": {

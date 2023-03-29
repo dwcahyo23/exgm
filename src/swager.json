@@ -37,7 +37,7 @@
         }
       }
     },
-    "/exgm": {
+    "/ews": {
       "get": {
         "security": [
           {
@@ -47,6 +47,9 @@
         "responses": {
           "200": {
             "description": "Will send data"
+          },
+          "400": {
+            "description": "Error: Bad Request"
           },
           "401": {
             "description": "You do not have necessary permissions for the resource"

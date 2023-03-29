@@ -20,6 +20,12 @@ export const _muser = db.define(
         token: {
             type: DataTypes.TEXT,
         },
+        no_ex: {
+            type: DataTypes.TEXT,
+        },
+        dakses: {
+            type: DataTypes.JSON,
+        },
     },
     { freezeTableName: true, timestamps: false }
 )

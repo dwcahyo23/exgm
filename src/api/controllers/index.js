@@ -224,11 +224,28 @@ export default {
     },
 
     async _ews(req, res) {
+        const error = []
         try {
             const authHeader = req.headers['authorization']
             const token = authHeader && authHeader.split(' ')[1]
-            const response = await _ews.findAll({})
-            return res.status(200).json(response)
+            const findAccess = await _muser.findOne({ where: { token: token } })
+
+            if (findAccess.no_ex.length < 1) {
+                error.push({
+                    message: 'no-ex not found',
+                })
+            }
+
+            // console.log(findAccess.dakses)
+
+            if (error.length === 0) {
+                const response = await _ews.findAll({
+                    where: { cst_no: findAccess.no_ex },
+                })
+                return res.status(200).json(response)
+            }
+
+            return res.status(400).json(error)
         } catch (error) {
             console.log(error)
         }

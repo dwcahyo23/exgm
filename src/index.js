@@ -10,10 +10,10 @@ const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swager.json')
 const cookieParser = require('cookie-parser')
 
-dotenv.config()
+dotenv.config({ path: path.join(__dirname, '../.env') })
 
 const app = express()
-app.set('views', path.join(__dirname, '../public/views'))
+app.set('views', path.join(__dirname, '../views'))
 app.set('view engine', 'pug')
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
