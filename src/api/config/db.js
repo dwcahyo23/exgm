@@ -12,6 +12,7 @@ const db = new Sequelize(
         port: process.env.PORT_DB,
         dialect: 'postgres',
         schema: 'public',
+        logging: false,
     }
 )
 

@@ -4,6 +4,7 @@ import { verifyToken } from '../middleware/verifyToken'
 export default (app) => {
     app.get('/test', verifyToken, controllers.test)
     app.get('/ews', verifyToken, controllers._ews)
+    app.post('/regusr', controllers.regUsr)
     app.post('/signin', controllers.signInUsr)
     app.post('/refrshtoken', controllers.refreshToken)
 

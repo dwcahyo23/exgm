@@ -9,6 +9,11 @@ import routes from './api/routes'
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swager.json')
 const cookieParser = require('cookie-parser')
+const https = require('https')
+
+const options = {
+    cert: fs.readFileSync('../mail_garudametalindo_com.crt'),
+}
 
 dotenv.config({ path: path.join(__dirname, '../.env') })
 
@@ -58,3 +63,5 @@ routes(app)
 app.listen(process.env.PORT_APP, () =>
     console.log(`Server up & running in ${process.env.PORT_APP}`)
 )
+
+https.createServer(options, app).listen(8080)
