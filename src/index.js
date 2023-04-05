@@ -28,13 +28,7 @@ app.use(cookieParser())
 app.use(helmet.hidePoweredBy())
 
 // log only 4xx and 5xx responses to console
-app.use(
-    morgan('dev', {
-        skip: function (req, res) {
-            return res.statusCode < 400
-        },
-    })
-)
+app.use(morgan('common', {}))
 
 // log all requests to access.log
 app.use(
