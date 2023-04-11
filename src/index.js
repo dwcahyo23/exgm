@@ -54,5 +54,3 @@ routes(app)
 app.listen(process.env.PORT_APP, () =>
     console.log(`Server up & running in ${process.env.PORT_APP}`)
 )
-
-https.createServer(app).listen(8080)
