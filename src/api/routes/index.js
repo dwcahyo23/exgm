@@ -7,9 +7,7 @@ export default (app) => {
     app.post('/regusr', controllers.regUsr)
     app.post('/signin', controllers.signInUsr)
     app.post('/refrshtoken', controllers.refreshToken)
-
-    app.post('/threeViewStatus', verifyToken, controllers._live_status)
-    // app.post('/threeViewMch', verifyToken, controllers._live_mch)
+    app.post('/3viewStatus', verifyToken, controllers._live_status)
 
     // route to login page
     app.get('/', (req, res) => {

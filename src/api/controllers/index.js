@@ -252,21 +252,6 @@ export default {
         }
     },
 
-    // async _live_mch(req, res) {
-    //     await axios({
-    //         method: 'post',
-    //         url: 'http://192.168.192.34:8080/api/master/machineInfo',
-    //         data: { ...req.body },
-    //         headers: { language: 'EN' },
-    //     })
-    //         .then((x) => {
-    //             res.status(200).json(x.data)
-    //         })
-    //         .catch((err) => {
-    //             res.status(500).json(err)
-    //         })
-    // },
-
     async _live_status(req, res) {
         await axios({
             method: 'post',
