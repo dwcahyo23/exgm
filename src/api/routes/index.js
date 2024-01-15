@@ -9,6 +9,7 @@ export default (app) => {
     app.post('/refrshtoken', controllers.refreshToken)
 
     app.post('/threeViewStatus', verifyToken, controllers._live_status)
+    app.post('/threeViewMch', verifyToken, controllers._live_mch)
 
     // route to login page
     app.get('/', (req, res) => {
