@@ -271,7 +271,7 @@ export default {
         await axios({
             method: 'post',
             url: 'http://192.168.192.34/api/statusBoard/equipmentInfo',
-            data: { ...req.body },
+            data: {},
             headers: { language: 'EN' },
         })
             .then((x) => {
