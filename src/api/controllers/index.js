@@ -7,6 +7,7 @@ import Base64 from 'crypto-js/enc-base64.js'
 import HmacSHA256 from 'crypto-js/hmac-sha256.js'
 import Utf8 from 'crypto-js/enc-utf8.js'
 import jwtDecode from 'jwt-decode'
+import axios from 'axios'
 
 function base64url(source) {
     // Encode in classical base64
@@ -249,5 +250,20 @@ export default {
         } catch (error) {
             console.log(error)
         }
+    },
+
+    async _live_status(req, res) {
+        await axios({
+            method: 'post',
+            url: 'http://192.168.192.34:8080/api/master/machineInfo',
+            data: { ...req.body },
+            headers: { language: 'EN' },
+        })
+            .then((x) => {
+                res.status(200).json(x.data)
+            })
+            .catch((err) => {
+                res.status(500).json(err)
+            })
     },
 }
