@@ -266,4 +266,19 @@ export default {
                 res.status(500).json(err)
             })
     },
+
+    async _stop_block(req, res) {
+        await axios({
+            method: 'post',
+            url: 'http://192.168.192.34:8080/api/workerGet/getStopBlock',
+            data: {...req.body},
+            headers: { language: 'EN' },
+        })
+            .then((x) => {
+                res.status(200).json(x.data)
+            })
+            .catch((err) => {
+                res.status(500).json(err)
+            })
+    },
 }

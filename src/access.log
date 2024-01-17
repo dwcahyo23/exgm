@@ -140,3 +140,4 @@
 ::ffff:127.0.0.1 - - [15/Jan/2024:08:48:08 +0000] "POST /threeViewMch HTTP/1.1" 200 641676
 ::ffff:127.0.0.1 - - [15/Jan/2024:08:51:04 +0000] "POST /threeViewMch HTTP/1.1" 404 14
 ::ffff:127.0.0.1 - - [15/Jan/2024:08:51:17 +0000] "POST /threeViewStatus HTTP/1.1" 200 495070
+::ffff:127.0.0.1 - - [17/Jan/2024:08:13:32 +0000] "POST /3viewStopBlock HTTP/1.1" 200 1260
